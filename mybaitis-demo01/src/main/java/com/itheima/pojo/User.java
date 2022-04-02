@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -63,9 +64,30 @@ public class User implements Serializable {
      */
     @TableField(exist = false)
     private List<Role> roles;
+    /**
+     *
+     */
+    @TableField(exist = false)
+    private ArrayList<Integer> roleIds;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public ArrayList<Integer> getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(ArrayList<Integer> roleIds) {
+        this.roleIds = roleIds;
+    }
 
     @Override
     public boolean equals(Object that) {
@@ -116,6 +138,7 @@ public class User implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", roles=").append(roles);
+        sb.append(", roleIds=").append(roleIds);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

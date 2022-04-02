@@ -29,11 +29,11 @@ public interface UserMapper extends BaseMapper<User> {
      * 需求：增加一条用户数据(包含该用户指定的角色)
      * 添加角色
      *
-     * @param userId 用户id
-     * @param roleId 角色id
+     * @param uid 用户id
+     * @param roleIds 角色id
      * @return int
      */
-    int insertUserRole(@Param("user_id") Integer userId, @Param("role_id") List<Integer> roleId);
+    int insertUserRole(@Param("uid") Integer uid, @Param("roleIds") List<Integer> roleIds);
 }
 
 

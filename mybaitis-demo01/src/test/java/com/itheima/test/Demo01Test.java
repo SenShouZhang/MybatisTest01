@@ -6,6 +6,8 @@ import com.itheima.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,16 +34,18 @@ public class Demo01Test {
      */
     @Test
     public void test02() {
-        SqlSession sqlSession = MyBatisUtil.openSession();
+        SqlSession sqlSession = MyBatisUtil.openSession(true);
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = new User();
         user.setUsername("wangwu");
         user.setEmail("wangwu@163.com");
         user.setPassword("123");
-        int insert = mapper.insert(user);
-        System.out.println(insert == 1 ? "添加成功！" : "添加失败！");
+        mapper.insert(user);
         Integer userId = user.getId();
-
-        MyBatisUtil.commitAndClose(sqlSession);
+        ArrayList<Integer> roleIds = new ArrayList<>();
+        Collections.addAll(roleIds, 1, 2, 3);
+        user.setRoleIds(roleIds);
+        mapper.insertUserRole(userId, user.getRoleIds());
+        sqlSession.close();
     }
 }

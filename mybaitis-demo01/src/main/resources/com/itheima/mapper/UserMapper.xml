@@ -26,7 +26,7 @@
     <insert id="insertUserRole">
         insert into t_user_role values
         <foreach collection="roleIds" item="roleId" separator=",">
-            (#{userId},#{roleId})
+            (#{uid},#{roleId})
         </foreach>
     </insert>
     <select id="findUserAndRole" resultMap="BaseResultMap">
