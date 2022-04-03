@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * 需求: 查询前两个用户的信息以及对应的角色信息
  * 需求：增加一条用户数据(包含该用户指定的角色)
+ * 根据用户id修改用户数据(包含该用户指定的角色)
  *
  * @author zhang
  * @description 针对表【t_user】的数据库操作Mapper
@@ -29,11 +30,20 @@ public interface UserMapper extends BaseMapper<User> {
      * 需求：增加一条用户数据(包含该用户指定的角色)
      * 添加角色
      *
-     * @param uid 用户id
+     * @param uid     用户id
      * @param roleIds 角色id
      * @return int
      */
     int insertUserRole(@Param("uid") Integer uid, @Param("roleIds") List<Integer> roleIds);
+
+    /**
+     * 根据用户id修改用户数据(包含该用户指定的角色)
+     * 删除对应用户id的所有角色
+     *
+     * @param uid 用户id
+     * @return int
+     */
+    int deleteUserRole(Integer uid);
 }
 
 

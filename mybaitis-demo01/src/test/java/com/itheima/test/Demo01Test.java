@@ -48,4 +48,20 @@ public class Demo01Test {
         mapper.insertUserRole(userId, user.getRoleIds());
         sqlSession.close();
     }
+
+    /**
+     * 修改
+     * 根据用户id修改用户数据(包含该用户指定的角色)
+     */
+    @Test
+    public void test03() {
+        SqlSession sqlSession = MyBatisUtil.openSession(true);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(6);
+        user.setUsername("zhaoliu");
+        user.setPassword("456");
+        user.setEmail("745447868@qq.com");
+        mapper.updateById(user);
+    }
 }

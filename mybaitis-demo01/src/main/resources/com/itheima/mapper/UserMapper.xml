@@ -29,6 +29,9 @@
             (#{uid},#{roleId})
         </foreach>
     </insert>
+    <delete id="deleteUserRole">
+        delete from t_user_role where user_id = #{uid};
+    </delete>
     <select id="findUserAndRole" resultMap="BaseResultMap">
         select *
         from (select * from t_user limit #{index},#{count}) tu,
