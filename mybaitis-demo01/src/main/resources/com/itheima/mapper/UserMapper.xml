@@ -30,7 +30,27 @@
         </foreach>
     </insert>
     <delete id="deleteUserRole">
-        delete from t_user_role where user_id = #{uid};
+        delete
+        from t_user_role
+        where user_id = #{uid};
+    </delete>
+    <!--
+    传入的参数是数组或者集合的时候使用foreach动态循环
+    collection 代表要循环的数组名可以是传入数组名
+    item 代表循环数组中每一个元素的名称
+    separator 代表循环出来的每一个元素用,隔开 例： 1,2,3,4
+    open 代表在循环后的最后结果开始处添加(
+    close 代表在循环后的最后结果结束处添加)
+    这个往往用在 where ..in(..)中
+    其他情况往往加上(#{...})添加
+    -->
+    <delete id="deleteUserRoleBatchsIds">
+        delete
+        from t_user_role
+        where user_id in
+            <foreach collection="uids" item="uid" separator="," open="(" close=")">
+                #{uid}
+            </foreach>
     </delete>
     <select id="findUserAndRole" resultMap="BaseResultMap">
         select *

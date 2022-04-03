@@ -60,10 +60,32 @@ public class Demo01Test {
         SqlSession sqlSession = MyBatisUtil.openSession(true);
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = new User();
-        user.setId(6);
-        user.setUsername("zhaoliu");
-        user.setPassword("456");
-        user.setEmail("745447868@qq.com");
+        user.setId(7);
+        user.setUsername("wangba");
+        user.setPassword("123456");
+        user.setEmail("244324234@qq.com");
         mapper.updateById(user);
+        mapper.deleteUserRole(user.getId());
+        ArrayList<Integer> list = new ArrayList<>();
+        Collections.addAll(list, 1, 2, 3);
+        user.setRoleIds(list);
+        mapper.insertUserRole(user.getId(), user.getRoleIds());
+        sqlSession.close();
+    }
+
+    /**
+     * 删除
+     * 需求: 根据id删除用户(以及对应的角色信息)
+     */
+    @Test
+    public void test04() {
+        SqlSession sqlSession = MyBatisUtil.openSession(true);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        ArrayList<Integer> list = new ArrayList<>();
+        Collections.addAll(list, 2, 7);
+        //删除时要先删除子表，再删除主表，否则会出现外键约束的情况
+        mapper.deleteUserRoleBatchsIds(list);
+        mapper.deleteBatchIds(list);
+        sqlSession.close();
     }
 }
