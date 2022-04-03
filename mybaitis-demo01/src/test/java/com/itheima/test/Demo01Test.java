@@ -52,6 +52,7 @@ public class Demo01Test {
     /**
      * 修改
      * 根据用户id修改用户数据(包含该用户指定的角色)
+     * 修改角色时，先删除对应用户所有角色，再添加其所有角色
      */
     @Test
     public void test03() {
